@@ -87,7 +87,7 @@ class MoneyInput extends TextInput
     /**
      * Set the symbol placement.
      *
-     * @param string $placement One of: 'before', 'after', 'hidden'
+     * @param  string  $placement  One of: 'before', 'after', 'hidden'
      */
     public function symbolPlacement(string $placement): static
     {

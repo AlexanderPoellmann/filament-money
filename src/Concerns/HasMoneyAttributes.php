@@ -51,7 +51,7 @@ trait HasMoneyAttributes
     {
         $code = $this->evaluate($currencyCode);
 
-        $currencies = new ISOCurrencies();
+        $currencies = new ISOCurrencies;
         $currency = new Currency($code);
 
         if (! $currencies->contains($currency)) {
@@ -129,7 +129,7 @@ trait HasMoneyAttributes
     /**
      * Format an amount in cents to a display string.
      *
-     * @param int|string|null $amountInCents Amount in minor units (cents)
+     * @param  int|string|null  $amountInCents  Amount in minor units (cents)
      */
     protected function formatMoney(int|string|null $amountInCents): string
     {
@@ -153,7 +153,7 @@ trait HasMoneyAttributes
     /**
      * Parse a display string to cents.
      *
-     * @param string|null $value Display value (e.g., "12.34" or "1,234.56")
+     * @param  string|null  $value  Display value (e.g., "12.34" or "1,234.56")
      * @return int Amount in minor units (cents)
      */
     protected function parseMoney(?string $value): int
