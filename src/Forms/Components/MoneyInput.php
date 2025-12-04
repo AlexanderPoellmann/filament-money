@@ -25,9 +25,9 @@ class MoneyInput extends \Pelmered\FilamentMoneyField\Forms\Components\MoneyInpu
                 return '';
             }
 
-            $amount   = $state->getAmount();
+            $amount = $state->getAmount();
             $currency = Currency::fromMoney($state);
-            $locale   = $component->getLocale();
+            $locale = $component->getLocale();
 
             return MoneyFormatter::numberFormat((int) $amount, $locale, $this->getDecimals());
         });
