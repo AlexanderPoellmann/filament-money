@@ -19,7 +19,7 @@ class MoneyInput extends \Pelmered\FilamentMoneyField\Forms\Components\MoneyInpu
             }
 
             $currency = $component->getCurrency();
-            $amount   = MoneyFormatter::parseDecimal((string) $state, $currency, $component->getLocale(), $this->getDecimals());
+            $amount = MoneyFormatter::parseDecimal((string) $state, $currency, $component->getLocale(), $this->getDecimals());
 
             $amount = new Money((int) $amount, $currency->toMoneyCurrency());
 
