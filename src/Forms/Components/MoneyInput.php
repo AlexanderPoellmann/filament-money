@@ -2,12 +2,7 @@
 
 namespace AlexanderPoellmann\FilamentMoney\Forms\Components;
 
-use Filament\Actions\Action;
-use Filament\Forms\Components\Select;
-use Illuminate\Database\Eloquent\Model;
 use Money\Money;
-use Pelmered\LaraPara\Currencies\Currency;
-use Pelmered\LaraPara\Currencies\CurrencyRepository;
 use Pelmered\LaraPara\MoneyFormatter\MoneyFormatter;
 
 class MoneyInput extends \Pelmered\FilamentMoneyField\Forms\Components\MoneyInput
@@ -18,7 +13,7 @@ class MoneyInput extends \Pelmered\FilamentMoneyField\Forms\Components\MoneyInpu
     {
         parent::setUp();
 
-        $this->dehydrateStateUsing(function (MoneyInput $component, null|int|string $state): ?string {
+        $this->dehydrateStateUsing(function (self $component, null|int|string $state): ?string {
             if (! $state) {
                 return null;
             }
@@ -30,5 +25,14 @@ class MoneyInput extends \Pelmered\FilamentMoneyField\Forms\Components\MoneyInpu
 
             return $amount->getAmount();
         });
+    }
+
+    public function getDecimals(): int
+    {
+        if (! is_null($this->decimals)) {
+            return $this->decimals;
+        }
+
+        return (int) config('filament-money-field.decimal_digits', 2);
     }
 }
