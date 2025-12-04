@@ -2,9 +2,9 @@
 
 namespace AlexanderPoellmann\FilamentMoney\Tests;
 
+use AlexanderPoellmann\FilamentMoney\FilamentMoneyServiceProvider;
 use Illuminate\Database\Eloquent\Factories\Factory;
 use Orchestra\Testbench\TestCase as Orchestra;
-use AlexanderPoellmann\FilamentMoney\FilamentMoneyServiceProvider;
 
 class TestCase extends Orchestra
 {
