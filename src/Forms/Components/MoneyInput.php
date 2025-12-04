@@ -3,6 +3,7 @@
 namespace AlexanderPoellmann\FilamentMoney\Forms\Components;
 
 use Money\Money;
+use Pelmered\LaraPara\Currencies\Currency;
 use Pelmered\LaraPara\MoneyFormatter\MoneyFormatter;
 
 class MoneyInput extends \Pelmered\FilamentMoneyField\Forms\Components\MoneyInput
@@ -12,6 +13,24 @@ class MoneyInput extends \Pelmered\FilamentMoneyField\Forms\Components\MoneyInpu
     protected function setUp(): void
     {
         parent::setUp();
+
+        $this->formatStateUsing(function (self $component, mixed $state): string {
+            $this->prepare();
+
+            if (is_string($state) || is_numeric($state)) {
+                $state = new Money($state, new \Money\Currency('EUR'));
+            }
+
+            if (! $state instanceof Money) {
+                return '';
+            }
+
+            $amount   = $state->getAmount();
+            $currency = Currency::fromMoney($state);
+            $locale   = $component->getLocale();
+
+            return MoneyFormatter::numberFormat((int) $amount, $locale, $this->getDecimals());
+        });
 
         $this->dehydrateStateUsing(function (self $component, null|int|string $state): ?string {
             if (! $state) {
